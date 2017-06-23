@@ -7,12 +7,36 @@
   },
   "dependencies": {
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-schema-views": "^1.0.0",
+    "uuid": "^3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ineffablep/react-schema-form.git"
+  },
+  "keywords": [
+    "React",
+    "JSON",
+    "Schema",
+    "Parser",
+    "JS",
+    "Forms",
+    "Material Design",
+    "Flat Design",
+    "Windows 10 Design",
+    "Bootstrap Design"
+  ],
+  "author": "Sireesh Pangaluri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ineffablep/react-schema-form/issues"
+  },
+  "homepage": "https://github.com/ineffablep/react-schema-form#readme"
 }
