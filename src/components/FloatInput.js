@@ -1,29 +1,69 @@
 import React from "react";
 import PropTypes from "prop-types";
-import uuid from "uuid";
 
 const FloatInput = props => {
-  let placeholder = props.placeholder ? props.placeholder : props.labelText;
+  const {
+    labelText,
+    placeholder,
+    onChange,
+    onBlur,
+    inputClass,
+    inputStyle,
+    labelStyle,
+    labelClass,
+    showBorder,
+    theme,
+    showRoundBorder,
+    noBorder,
+    showAnimation,
+    floatLabel,
+    borderClass,
+    borderStyle,
+    id,
+    ...rest
+  } = props;
   return (
-    <p>
+    <div className="float-group">
       <input
-        className="float-input"
-        style={props.inputStyle}
-        {...props}
-        placeholder={placeholder}
+        id={id}
+        className={
+          inputClass && inputClass !== "" ? inputClass : " float-input"
+        }
+        style={inputStyle}
+        {...rest}
         onChange={e => {
-          props.onChange(e.target.value);
+          onChange(e.target.value);
         }}
-        onBlur={event => props.onBlur(props.id, event.target.value)}
+        required={true}
+        onBlur={event => onBlur(id, event.target.value)}
       />
-    </p>
+      <label
+        htmlFor={id}
+        className={
+          labelClass && labelClass !== "" ? labelClass : "w3-text-theme"
+        }
+        style={labelStyle}
+      >
+        {labelText}
+      </label>
+      <span
+        className={
+          borderClass && borderClass !== "" ? borderClass : "w3-theme"
+        }
+        style={borderStyle}
+      />
+    </div>
   );
 };
 
 FloatInput.propTypes = {
   labelText: PropTypes.string,
   inputClass: PropTypes.string,
+  labelClass: PropTypes.string,
+  labelStyle: PropTypes.object,
+  borderClass: PropTypes.string,
   inputStyle: PropTypes.object,
+  borderStyle: PropTypes.object,
   id: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func
@@ -31,9 +71,12 @@ FloatInput.propTypes = {
 
 FloatInput.defaultProps = {
   labelText: "Label",
-  inputClass: "w3-input",
+  inputClass: "float-input",
   inputStyle: {},
-  id: uuid.v4(),
+  labelStyle: {},
+  labelClass: "w3-text-theme",
+  borderClass: "w3-theme",
+  borderStyle: {},
   onChange: () => {},
   onBlur: () => {}
 };

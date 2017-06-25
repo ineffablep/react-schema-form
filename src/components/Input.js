@@ -1,38 +1,75 @@
 import React from "react";
 import PropTypes from "prop-types";
-import uuid from "uuid";
 
 const Input = props => {
+  const {
+    id,
+    inputStyle,
+    inputClass,
+    onChange,
+    onBlur,
+    labelClass,
+    labelStyle,
+    labelText,
+    showBorder,
+    showRoundBorder,
+    noBorder,
+    showAnimation,
+    floatLabel,
+    borderClass,
+    theme,
+    borderStyle,
+    ...rest
+  } = props,
+    clasName = getClass(
+      inputClass,
+      showBorder,
+      showRoundBorder,
+      noBorder,
+      theme,
+      showAnimation
+    );
+
   return (
     <p>
-      <label className={props.labelClass} style={props.labelStyle}>
-        {props.labelText}
+      <label htmlFor={id} className={labelClass} style={labelStyle}>
+        {labelText}
       </label>
       <input
-        {...props}
-        className={getClass(props)}
-        style={props.inputStyle}
+        id={id}
+        className={clasName}
+        style={inputStyle}
+        {...rest}
         onChange={e => {
-          props.onChange(e.target.value);
+          onChange(e.target.value);
         }}
-        onBlur={event => props.onBlur(props.id, event.target.value)}
+        onBlur={event => onBlur(id, event.target.value)}
       />
     </p>
   );
 };
 
-const getClass = props => {
-  let inputCls = props.inputClass;
-  if (props.showBorder) {
+const getClass = (
+  inputCls,
+  showBorder,
+  showRoundBorder,
+  noBorder,
+  theme,
+  showAnimation
+) => {
+  if (inputCls === "") {
+    inputCls = "w3-input";
+  }
+  if (showBorder) {
     inputCls = inputCls + " w3-border";
   }
-  if (props.showRoundBorder) {
+  if (showRoundBorder || theme === "ios") {
     inputCls = inputCls + " w3-round-large";
   }
-  if (props.noBorder) {
+  if (noBorder) {
     inputCls = inputCls + " w3-border-0";
   }
-  if (props.showAnimation) {
+  if (showAnimation) {
     inputCls = inputCls + " w3-animate-input";
   }
   return inputCls;
@@ -63,7 +100,6 @@ Input.defaultProps = {
   showRoundBorder: false,
   noBorder: false,
   showAnimation: false,
-  id: uuid.v4(),
   onChange: () => {},
   onBlur: () => {}
 };

@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import BaseInput from "./components/BaseInput";
-
+import Form from "./components/Form";
+import formSchema from "./formSchema";
 class App extends Component {
   render() {
-   
     return (
       <div className="App">
         <div className="App-header">
-          <BaseInput type="checkbox" checked="checked"  />
-          <BaseInput placeholder="Test 2" floatLabel={true} />
+          <Form schema={formSchema} />
         </div>
       </div>
     );

@@ -1,14 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Switch from "./Switch";
 
-const Checkbox = props => {
-  if (props.theme  === "ios"|| props.theme==="win"|| props.theme==="android") {
-    return <Switch {...props} />;
-  }
+const Switch = props => {
   const {
     id,
-    theme,
     inputStyle,
     inputClass,
     onChange,
@@ -22,25 +17,33 @@ const Checkbox = props => {
     borderClass,
     borderStyle,
     floatLabel,
+    theme,
     ...rest
   } = props;
   return (
     <p>
-      <input
-        id={id}
-        className={inputClass + " w3-check"}
-        style={inputStyle}
-        {...rest}
-        onChange={event => onChange(event.target.checked)}
-      />
+
       <label htmlFor={id} className={labelClass} style={labelStyle}>
         {labelText}
+      </label>
+
+      <label className="switch">
+        <input
+          type="checkbox"
+          {...rest}
+          id={id}
+          onChange={event => onChange(event.target.checked)}
+        />
+        <span
+          className={"switch-btn " + inputClass + " " + theme}
+          style={inputStyle}
+        />
       </label>
     </p>
   );
 };
 
-Checkbox.propTypes = {
+Switch.prototype = {
   labelText: PropTypes.string,
   labelClass: PropTypes.string,
   labelStyle: PropTypes.object,
@@ -50,7 +53,7 @@ Checkbox.propTypes = {
   theme: PropTypes.string
 };
 
-Checkbox.defaultProps = {
+Switch.defaultProps = {
   labelText: "Label",
   inputClass: "w3-check",
   inputStyle: {},
@@ -60,4 +63,4 @@ Checkbox.defaultProps = {
   onChange: () => {}
 };
 
-export default Checkbox;
+export default Switch;

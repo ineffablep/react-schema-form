@@ -5,8 +5,11 @@ import Input from "./Input";
 import FloatInput from "./FloatInput";
 import Checkbox from "./Checkbox";
 const BaseInput = props => {
-  if (props.type === "checkbox") return <Checkbox {...props} />;
-  return props.floatLabel ? <Input {...props} /> : <FloatInput {...props} />;
+   let id= props.id? props.id:uuid.v4();
+  if (props.type === "checkbox") return <Checkbox {...props} id={id} />;
+  return props.floatLabel || props.theme === "android"
+    ? <FloatInput {...props} id={id} />
+    : <Input {...props} id={id} />;
 };
 
 BaseInput.propTypes = {
@@ -19,10 +22,12 @@ BaseInput.propTypes = {
   showRoundBorder: PropTypes.bool,
   noBorder: PropTypes.bool,
   showAnimation: PropTypes.bool,
-
+  borderClass: PropTypes.string,
+  borderStyle: PropTypes.object,
   id: PropTypes.string,
   onChange: PropTypes.func,
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
+  theme: PropTypes.string
 };
 
 BaseInput.defaultProps = {
@@ -37,7 +42,7 @@ BaseInput.defaultProps = {
   noBorder: false,
   showAnimation: false,
   floatLabel: false,
-  id: uuid.v4()
+  theme: "ios"
 };
 
 export default BaseInput;
