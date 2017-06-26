@@ -9,10 +9,18 @@ const formSchema = {
       component: "BaseInput",
       props: {
         labelText: "User Name",
+        placeholder: "Phone number or Email address",
         labelClass: "w3-label",
         type: "text",
         required: "true",
-        id: "userName"
+        id: "userName",
+        validateOn: "onChange",
+        validateRules: [
+          {
+            rule: "required",
+            message: "Phone number or Email address is required"
+          }
+        ]
       }
     },
     {
@@ -32,6 +40,9 @@ const formSchema = {
         type: "checkbox",
         id: "rememberMe"
       }
+    },
+    {
+      component: "Button"
     }
   ]
 };

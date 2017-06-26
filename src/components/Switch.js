@@ -6,7 +6,7 @@ const Switch = props => {
     id,
     inputStyle,
     inputClass,
-    onChange,
+    onValueChange,
     labelClass,
     labelStyle,
     labelText,
@@ -32,7 +32,7 @@ const Switch = props => {
           type="checkbox"
           {...rest}
           id={id}
-          onChange={event => onChange(event.target.checked)}
+          onChange={event => onValueChange(id,event.target.checked)}
         />
         <span
           className={"switch-btn " + inputClass + " " + theme}

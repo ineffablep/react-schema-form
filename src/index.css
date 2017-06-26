@@ -43,7 +43,7 @@
   width: 100%;
 }
 
-.float-input ~ span {
+.float-input ~ .bar {
   display: block;
   width: 0;
   height: 2px;
@@ -60,7 +60,7 @@
   border: none !important;
 }
 
-.float-input:focus ~ span {
+.float-input:focus ~ .bar {
   width: 100%;
   -webkit-transition: all 0.075s ease;
   transition: all 0.075s ease;

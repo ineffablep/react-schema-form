@@ -2,50 +2,84 @@ import React from "react";
 import PropTypes from "prop-types";
 import BaseInput from "./BaseInput";
 import isMobile from "./IsMobile";
+import Button from "./Button";
+import uuid from "uuid";
 
-const onFieldChange = (id, res) => {};
-const getTheme = () => {
-  let theme = "browser";
-  if (isMobile.iOS()) {
-    theme = "ios";
-  } else if (isMobile.Android()) {
-    theme = "android";
-  } else if (isMobile.Windows()) {
-    theme = "win";
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      validationMessage: ""
+    };
+    this.valueMap = new Map();
+    this.onFieldChange = this.onFieldChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
-  console.log(navigator.userAgent);
-  console.log(theme);
-  return theme;
-};
-const Form = props => {
-  const { schema } = props,
-    { component, children } = schema,
-    theme = getTheme();
-  return (
-    <form className="w3-form" {...schema.props}>
-      {React.createElement(component, { ...schema.props }, [schema.text])}
-      {children.map(comp => {
-        if (React.DOM.hasOwnProperty(comp.component)) {
-          return React.createElement(comp.component, { ...comp.props }, [
-            comp.text
-          ]);
-        } else {
-          return (
-            <BaseInput
-              {...comp.props}
-              key={comp.props.id}
-              theme={theme}
-              onChange={onFieldChange}
-            />
-          );
-        }
-      })}
-    </form>
-  );
-};
+  onFieldChange(id, res) {
+    this.valueMap.set(id, res);
+  }
 
-Form.prototype = {
-  schema: PropTypes.object.required
+  onSubmit(e) {
+    e.preventDefault();
+    let url = this.props.submitUrl,
+      callBack = this.props.onSubmitCallback,
+      formData = {};
+    this.valueMap.forEach((val, key) => {
+      formData[key] = val;
+    });
+    if (callBack) {
+      callBack(formData);
+    } else if (url) {
+    }
+  }
+
+  getTheme(defaultTheme = "browser") {
+    let theme = defaultTheme;
+    if (isMobile.iOS()) {
+      theme = "ios";
+    } else if (isMobile.Android()) {
+      theme = "android";
+    } else if (isMobile.Windows()) {
+      theme = "win";
+    }
+    return theme;
+  }
+
+  render() {
+    const { component, children, defaultTheme } = this.props.schema,
+      theme = this.getTheme(defaultTheme);
+    return (
+      <form className="w3-form" {...this.props.schema.props}>
+        {React.createElement(component, { ...this.props.schema.props }, [this.props.schema.text])}
+        {children.map(comp => {
+          if (React.DOM.hasOwnProperty(comp.component)) {
+            return React.createElement(comp.component, { ...comp.props }, [
+              comp.text
+            ]);
+          } else if (comp.component.trim().toLowerCase() === "button") {
+            return (
+              <Button key={uuid.v4()} {...comp.props} onClick={this.onSubmit} />
+            );
+          } else {
+            return (
+              <BaseInput
+                {...comp.props}
+                key={comp.props.id}
+                theme={theme}
+                onValueChange={this.onFieldChange}
+              />
+            );
+          }
+        })}
+      </form>
+    );
+  }
+}
+
+
+Form.propTypes = {
+  schema: PropTypes.object.required,
+  onSubmitCallback: PropTypes.func
 };
 
 export default Form;

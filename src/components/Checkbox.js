@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import Switch from "./Switch";
 
 const Checkbox = props => {
-  if (props.theme  === "ios"|| props.theme==="win"|| props.theme==="android") {
+  if (
+    props.theme === "ios" ||
+    props.theme === "win" ||
+    props.theme === "android"
+  ) {
     return <Switch {...props} />;
   }
   const {
@@ -11,7 +15,7 @@ const Checkbox = props => {
     theme,
     inputStyle,
     inputClass,
-    onChange,
+    onValueChange,
     labelClass,
     labelStyle,
     labelText,
@@ -31,7 +35,7 @@ const Checkbox = props => {
         className={inputClass + " w3-check"}
         style={inputStyle}
         {...rest}
-        onChange={event => onChange(event.target.checked)}
+        onChange={event => onValueChange(id, event.target.checked)}
       />
       <label htmlFor={id} className={labelClass} style={labelStyle}>
         {labelText}

@@ -25,8 +25,7 @@ BaseInput.propTypes = {
   borderClass: PropTypes.string,
   borderStyle: PropTypes.object,
   id: PropTypes.string,
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
+  onValueChange: PropTypes.func,
   theme: PropTypes.string
 };
 
