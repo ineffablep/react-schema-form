@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import BaseInput from "./BaseInput";
 import isMobile from "./IsMobile";
 import Button from "./Button";
+import Select from './Select';
 import uuid from "uuid";
 
 class Form extends React.Component {
@@ -15,6 +16,7 @@ class Form extends React.Component {
     this.onFieldChange = this.onFieldChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
   onFieldChange(id, res) {
     this.valueMap.set(id, res);
   }
@@ -50,16 +52,22 @@ class Form extends React.Component {
       theme = this.getTheme(defaultTheme);
     return (
       <form className="w3-form" {...this.props.schema.props}>
-        {React.createElement(component, { ...this.props.schema.props }, [this.props.schema.text])}
+        {React.createElement(component, { ...this.props.schema.props }, [
+          this.props.schema.text
+        ])}
         {children.map(comp => {
-          if (React.DOM.hasOwnProperty(comp.component)) {
-            return React.createElement(comp.component, { ...comp.props }, [
-              comp.text
-            ]);
-          } else if (comp.component.trim().toLowerCase() === "button") {
+          if (comp.component.trim().toLowerCase() === "button") {
             return (
               <Button key={uuid.v4()} {...comp.props} onClick={this.onSubmit} />
             );
+          } else if (comp.component.trim().toLowerCase() === "select") {
+            return (
+              <Select key={uuid.v4()} {...comp.props} onValueChange={this.onFieldChange} />
+            );
+          } else if (React.DOM.hasOwnProperty(comp.component)) {
+            return React.createElement(comp.component, { ...comp.props }, [
+              comp.text
+            ]);
           } else {
             return (
               <BaseInput
@@ -75,7 +83,6 @@ class Form extends React.Component {
     );
   }
 }
-
 
 Form.propTypes = {
   schema: PropTypes.object.required,

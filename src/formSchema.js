@@ -30,7 +30,35 @@ const formSchema = {
         type: "password",
         required: "true",
         labelClass: "w3-label",
-        id: "passworrd"
+        id: "passworrd",
+        validateOn: "onChange",
+        validateRules: [
+          {
+            rule: "required",
+            message: "Password is required"
+          }
+        ]
+      }
+    },
+    {
+      component: "Select",
+      props: {
+        labelText: "I am a",
+        required: "true",
+        labelClass: "w3-select",
+        id: "userRole",
+        validateOn: "onChange",
+        validateRules: [
+          {
+            rule: "required",
+            message: "User Role is required"
+          }
+        ],
+        options:[
+          {value:"doctor",text:"Doctor"},
+          {value:"nurse",text:"Nurse"},
+        ],
+        value:"doctor"
       }
     },
     {

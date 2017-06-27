@@ -5,7 +5,7 @@ import Input from "./Input";
 import FloatInput from "./FloatInput";
 import Checkbox from "./Checkbox";
 const BaseInput = props => {
-   let id= props.id? props.id:uuid.v4();
+  let id = props.id ? props.id : uuid.v4();
   if (props.type === "checkbox") return <Checkbox {...props} id={id} />;
   return props.floatLabel || props.theme === "android"
     ? <FloatInput {...props} id={id} />
@@ -26,7 +26,8 @@ BaseInput.propTypes = {
   borderStyle: PropTypes.object,
   id: PropTypes.string,
   onValueChange: PropTypes.func,
-  theme: PropTypes.string
+  theme: PropTypes.string,
+  defaultOptionMessage: PropTypes.string
 };
 
 BaseInput.defaultProps = {
