@@ -156,3 +156,39 @@ input:checked + .android {
 input:checked + .switch-btn.android:before {
   background-color: #2196F3;
 }
+.radio-btn {
+  display: inline-flex;
+}
+.radio-btn .btn {
+  margin: 4px;
+  background-color: #EFEFEF;
+  border-radius: 4px;
+  border: 1px solid #D0D0D0;
+  overflow: auto;
+}
+.radio-btn .label {
+  float: left;
+  padding: 10px 0;
+  text-align: center;
+}
+.radio-btn .btn span {
+  text-align: center;
+  padding: 8px 16px;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.radio-btn .btn input {
+  position: absolute;
+  top: -20px;
+}
+
+.radio-btn input:checked + span {
+  background-color: #008000;
+  color: #F7F7F7;
+}
+.m-r-10 {
+  margin-right: 10px !important;
+}

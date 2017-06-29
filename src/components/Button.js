@@ -5,7 +5,7 @@ const Button = props => {
   const { buttonText, className, style, onClick } = props;
   return (
     <button
-      className={" w3-button w3-green " + className}
+      className={" w3-btn  w3-ripple " + className}
       style={style}
       onClick={onClick}
     >
@@ -23,7 +23,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   buttonText: "Submit",
-  className: "",
+  className: "w3-green",
   style: {}
 };
 

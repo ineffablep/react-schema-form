@@ -2,15 +2,28 @@ import React from "react";
 import PropTypes from "prop-types";
 import validate from "./validate";
 import uuid from "uuid";
+import * as api from "./api";
 
 class Select extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      validationMessage: ""
+      validationMessage: "",
+      value: this.props.selectedValue,
+      loadedOptions: this.props.options ? this.props.options : []
     };
     this.onSelectChange = this.onSelectChange.bind(this);
-    this.state = { value: this.props.value };
+    this.successCallback = this.successCallback.bind(this);
+    this.errorCallback = this.errorCallback.bind(this);
+  }
+
+  componentDidMount() {
+    if (
+      (!this.props.options || this.props.options.length === 0) &&
+      this.props.optionsUrl
+    ) {
+      api.get(this.props.optionsUrl, this.successCallback, this.errorCallback);
+    }
   }
 
   getClass() {
@@ -32,7 +45,6 @@ class Select extends React.Component {
 
   onSelectChange(e) {
     let value = e.target.value;
-    this.setState({ value: value });
     if (
       this.props.validateOn &&
       (this.props.validateOn.trim().toLowerCase() === "onchange" ||
@@ -40,25 +52,28 @@ class Select extends React.Component {
     ) {
       let error = validate(this.props.validateRules, value);
       if (error === "") {
-        this.props.onValueChange &&
+        this.setState({ validationMessage: "", value: value });
+        if (this.props.onValueChange)
           this.props.onValueChange(this.props.id, value);
-        this.setState({ validationMessage: "" });
       } else {
-        this.setState({ validationMessage: error });
+        this.setState({ validationMessage: error, value: value });
       }
     } else {
-      this.props.onValueChange &&
+      this.setState({ validationMessage: "", value: value });
+      if (this.props.onValueChange)
         this.props.onValueChange(this.props.id, value);
     }
   }
-
+  successCallback(response) {
+    this.setState({ loadedOptions: response });
+  }
+  errorCallback(err) {
+    console.log(err);
+  }
   renderOptions() {
-    if (this.props.options && this.props.options.length > 0) {
-      return this.props.options.map(opt => {
-        return <option key={uuid.v4()} value={opt.value}> {opt.text} </option>;
-      });
-    } else if (this.props.optionsUrl && this.props.optionsUrl !== "") {
-    }
+    return this.state.loadedOptions.map(opt => {
+      return <option key={uuid.v4()} value={opt.value}> {opt.text} </option>;
+    });
   }
 
   render() {
@@ -76,8 +91,10 @@ class Select extends React.Component {
       theme,
       validateOn,
       validateRules,
+      selectedValue,
       options,
       optionsUrl,
+      defaultOptionMessage,
       ...rest
     } = this.props,
       clasName = this.getClass();
@@ -96,7 +113,7 @@ class Select extends React.Component {
           {...rest}
           onChange={this.onSelectChange}
         >
-          <option value="" disabled selected>Choose your option</option>
+          <option value="" disabled>Choose your option</option>
           {this.renderOptions()}
         </select>
 
@@ -121,7 +138,7 @@ Select.propTypes = {
   onValueChange: PropTypes.func,
   options: PropTypes.array,
   optionsUrl: PropTypes.string,
-  value: PropTypes.any
+  selectedValue: PropTypes.any
 };
 
 Select.defaultProps = {

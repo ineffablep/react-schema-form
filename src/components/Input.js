@@ -10,14 +10,16 @@ class Input extends React.Component {
     };
     this.validateInput = this.validateInput.bind(this);
   }
-  getClass(
-    inputCls,
-    showBorder,
-    showRoundBorder,
-    noBorder,
-    theme,
-    showAnimation
-  ) {
+  
+  getClass() {
+    const {
+      showBorder,
+      noBorder,
+      showAnimation,
+      showRoundBorder,
+      theme
+    } = this.props;
+    let inputCls = this.props.inputClass;
     if (inputCls === "") {
       inputCls = "w3-input";
     }
@@ -35,7 +37,7 @@ class Input extends React.Component {
     }
     return inputCls;
   }
- 
+
   validateInput(e) {
     let value = e.target.value;
     if (
@@ -58,33 +60,24 @@ class Input extends React.Component {
   }
   render() {
     const {
-      id,
-      inputStyle,
-      inputClass,
-      onValueChange,
       labelClass,
       labelStyle,
       labelText,
+      inputStyle,
+      inputClass,
       showBorder,
       showRoundBorder,
       noBorder,
       showAnimation,
-      floatLabel,
-      borderClass,
       theme,
       validateOn,
       validateRules,
-      borderStyle,
+      onValueChange,
+      id,
+      type,
       ...rest
     } = this.props,
-      clasName = this.getClass(
-        inputClass,
-        showBorder,
-        showRoundBorder,
-        noBorder,
-        theme,
-        showAnimation
-      );
+      clasName = this.getClass();
 
     return (
       <p>
@@ -95,6 +88,7 @@ class Input extends React.Component {
           id={id}
           className={clasName}
           style={inputStyle}
+          type={type}
           {...rest}
           onChange={this.validateInput}
           onBlur={this.validateInput}
@@ -108,15 +102,16 @@ class Input extends React.Component {
 
 Input.propTypes = {
   labelText: PropTypes.string,
-  inputClass: PropTypes.string,
-  inputStyle: PropTypes.object,
   labelClass: PropTypes.string,
   labelStyle: PropTypes.object,
+  inputClass: PropTypes.string,
+  inputStyle: PropTypes.object,
   showBorder: PropTypes.bool,
   showRoundBorder: PropTypes.bool,
   noBorder: PropTypes.bool,
   showAnimation: PropTypes.bool,
   id: PropTypes.string,
+  type: PropTypes.string,
   onValueChange: PropTypes.func
 };
 
@@ -129,7 +124,8 @@ Input.defaultProps = {
   showBorder: true,
   showRoundBorder: false,
   noBorder: false,
-  showAnimation: false
+  showAnimation: false,
+  type:"text"
 };
 
 export default Input;

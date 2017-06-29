@@ -34,30 +34,26 @@ class FloatInput extends React.Component {
 
   render() {
     const {
-      labelText,
-      placeholder,
-      onValueChange,
-      inputClass,
-      inputStyle,
-      labelStyle,
       labelClass,
-      showBorder,
-      theme,
-      showRoundBorder,
-      noBorder,
-      showAnimation,
-      floatLabel,
+      labelText,
+      labelStyle,
+      inputStyle,
+      inputClass,
       borderClass,
+      borderStyle,
+      onValueChange,
+      id,
+      type,
       validateOn,
       validateRules,
-      borderStyle,
-      id,
+      placeholder,
       ...rest
     } = this.props;
     return (
       <p className="float-group">
         <input
           id={id}
+          type={type}
           className={
             inputClass && inputClass !== "" ? inputClass : " float-input"
           }
@@ -76,9 +72,7 @@ class FloatInput extends React.Component {
           {labelText}
         </label>
         <span
-          className={
-            borderClass && borderClass !== "" ? borderClass : "bar"
-          }
+          className={borderClass && borderClass !== "" ? borderClass : "bar"}
           style={borderStyle}
         />
 
@@ -98,11 +92,13 @@ FloatInput.propTypes = {
   labelClass: PropTypes.string,
   labelStyle: PropTypes.object,
   borderClass: PropTypes.string,
-  inputStyle: PropTypes.object,
   borderStyle: PropTypes.object,
+  inputStyle: PropTypes.object,
   id: PropTypes.string,
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func
+  type: PropTypes.string,
+  onValueChange: PropTypes.func,
+  validateOn: PropTypes.string,
+  validateRules: PropTypes.array
 };
 
 FloatInput.defaultProps = {
@@ -113,8 +109,8 @@ FloatInput.defaultProps = {
   labelClass: "w3-text-theme",
   borderClass: "w3-theme",
   borderStyle: {},
-  onChange: () => {},
-  onBlur: () => {}
+  type: "text",
+  onValueChange: () => {}
 };
 
 export default FloatInput;

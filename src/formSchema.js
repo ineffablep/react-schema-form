@@ -3,7 +3,7 @@ const formSchema = {
   props: {
     className: "w3-form"
   },
-  text: "Schema Driven From!",
+  text: "Schema Driven Registration Form!",
   children: [
     {
       component: "BaseInput",
@@ -30,7 +30,7 @@ const formSchema = {
         type: "password",
         required: "true",
         labelClass: "w3-label",
-        id: "passworrd",
+        id: "password",
         validateOn: "onChange",
         validateRules: [
           {
@@ -54,19 +54,35 @@ const formSchema = {
             message: "User Role is required"
           }
         ],
-        options:[
-          {value:"doctor",text:"Doctor"},
-          {value:"nurse",text:"Nurse"},
+        options: [
+          { value: "doctor", text: "Doctor" },
+          { value: "nurse", text: "Nurse" }
         ],
-        value:"doctor"
+        optionsUrl:"http://localhost:56772/api/values",
+        selectedValue: "nurse"
+      }
+    },
+    {
+      component: "Radio",
+      props: {
+        labelText: "Select Gender",
+        type: "radio",
+        id: "gender",
+        radioGroupName: "gender",
+        radioOptions: [
+          { value: "male", text:"Male" },
+          { value: "female",text:"Female" },
+          { value: "notMentioned",text:"Don't want to mention" }
+        ],
+        defaultValue: "male"
       }
     },
     {
       component: "Checkbox",
       props: {
-        labelText: "Remember Me",
+        labelText: "Agree Terms & Conditions",
         type: "checkbox",
-        id: "rememberMe"
+        id: "agreeTerms"
       }
     },
     {

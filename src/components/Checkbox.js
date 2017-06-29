@@ -19,27 +19,22 @@ const Checkbox = props => {
     labelClass,
     labelStyle,
     labelText,
-    showBorder,
-    showRoundBorder,
-    noBorder,
-    showAnimation,
-    borderClass,
-    borderStyle,
-    floatLabel,
     ...rest
   } = props;
   return (
     <p>
+      <label htmlFor={id} className={labelClass + " m-r-10"} style={labelStyle}>
+        {labelText}
+      </label>
       <input
         id={id}
+        type="checkbox"
         className={inputClass + " w3-check"}
         style={inputStyle}
         {...rest}
         onChange={event => onValueChange(id, event.target.checked)}
       />
-      <label htmlFor={id} className={labelClass} style={labelStyle}>
-        {labelText}
-      </label>
+
     </p>
   );
 };
@@ -50,7 +45,7 @@ Checkbox.propTypes = {
   labelStyle: PropTypes.object,
   inputClass: PropTypes.string,
   inputStyle: PropTypes.object,
-  onChange: PropTypes.func,
+  onValueChange: PropTypes.func,
   theme: PropTypes.string
 };
 
@@ -61,7 +56,7 @@ Checkbox.defaultProps = {
   labelClass: "",
   labelStyle: {},
   theme: "ios",
-  onChange: () => {}
+  onValueChange: () => {}
 };
 
 export default Checkbox;
