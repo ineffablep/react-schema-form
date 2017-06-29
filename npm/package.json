@@ -1,0 +1,25 @@
+{
+  "name": "react-schema-form",
+  "version": "1.0.0",
+  "description": "Json Schema driven React Forms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ineffablep/react-schema-form.git"
+  },
+  "keywords": [
+    "React",
+    "Form",
+    "Json",
+    "Schema"
+  ],
+  "author": "Sireesh Pangaluri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ineffablep/react-schema-form/issues"
+  },
+  "homepage": "https://github.com/ineffablep/react-schema-form#readme"
+}

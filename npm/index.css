@@ -1,0 +1,194 @@
+@import url("https://www.w3schools.com/w3css/4/w3.css");
+.w3-text-theme {
+  color: orangered !important;
+}
+
+.w3-theme {
+  background: orangered !important;
+}
+
+.float-input:focus ~ label, .float-input:valid ~ label {
+  color: #8e44ad;
+  top: -2.25rem;
+  -webkit-transition: all 0.125s ease;
+  transition: all 0.125s ease;
+}
+
+.float-group {
+  float: left;
+  width: 100%;
+  margin: 2rem 0 1rem;
+  position: relative;
+}
+
+.float-group label {
+  color: #ccc;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+
+.float-group.wide {
+  width: 100%;
+}
+
+.float-input {
+  padding: 8px;
+  display: block;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+}
+
+.float-input ~ .bar {
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #8e44ad;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  -webkit-transition: all 0.125s ease;
+  transition: all 0.125s ease;
+}
+
+.float-input:focus {
+  outline: none;
+  border: none !important;
+}
+
+.float-input:focus ~ .bar {
+  width: 100%;
+  -webkit-transition: all 0.075s ease;
+  transition: all 0.075s ease;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  display: none;
+}
+
+.switch-btn {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.switch-btn:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .ios {
+  background-color: #86d993;
+}
+
+input:focus + .ios {
+  box-shadow: 0 0 1px #86d993;
+}
+
+input:checked + .switch-btn:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.switch-btn.ios {
+  border-radius: 34px;
+}
+
+.switch-btn.ios:before {
+  border-radius: 50%;
+}
+
+input:checked + .win {
+  background-color: #2196F3;
+}
+
+input:focus + .win {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+.switch-btn.android {
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  background: white;
+  border: 4px solid #ccc;
+  border-radius: 2em;
+}
+
+.switch-btn.android::after {
+  background-color: #ccc;
+}
+.switch-btn.android:before {
+  border-radius: 2em;
+  height: 20px;
+  width: 20px;
+  background-color: #ccc;
+}
+
+input:checked + .android {
+  border: 4px solid #2196F3;
+}
+
+input:checked + .switch-btn.android:before {
+  background-color: #2196F3;
+}
+.radio-btn {
+  display: inline-flex;
+}
+.radio-btn .btn {
+  margin: 4px;
+  background-color: #EFEFEF;
+  border-radius: 4px;
+  border: 1px solid #D0D0D0;
+  overflow: auto;
+}
+.radio-btn .label {
+  float: left;
+  padding: 10px 0;
+  text-align: center;
+}
+.radio-btn .btn span {
+  text-align: center;
+  padding: 8px 16px;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.radio-btn .btn input {
+  position: absolute;
+  top: -20px;
+}
+
+.radio-btn input:checked + span {
+  background-color: #008000;
+  color: #F7F7F7;
+}
+.m-r-10 {
+  margin-right: 10px !important;
+}
