@@ -5,11 +5,11 @@ const Button = props => {
   const { buttonText, className, style, onClick } = props;
   return (
     <button
-      className={" w3-btn  w3-ripple " + className}
+      className={"w3-button  w3-ripple " + className}
       style={style}
       onClick={onClick}
     >
-      {buttonText}{" "}
+      {buttonText}
     </button>
   );
 };

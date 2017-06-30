@@ -67,7 +67,9 @@ class Form extends React.Component {
     }
   }
 
-  getTheme(defaultTheme = "browser") {
+  getTheme(defaultTheme ) {
+    if(defaultTheme)
+          return defaultTheme.trim().toLowerCase();
     let theme = defaultTheme;
     if (isMobile.iOS()) {
       theme = "ios";
@@ -75,6 +77,8 @@ class Form extends React.Component {
       theme = "android";
     } else if (isMobile.Windows()) {
       theme = "win";
+    } else {
+      theme="browser";
     }
     return theme;
   }

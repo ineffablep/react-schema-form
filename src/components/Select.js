@@ -40,6 +40,7 @@ class Select extends React.Component {
     if (this.props.noBorder) {
       selectCls = selectCls + " w3-border-0";
     }
+    console.log(selectCls);
     return selectCls;
   }
 
@@ -147,7 +148,7 @@ Select.defaultProps = {
   labelText: "Label",
   labelClass: "",
   labelStyle: {},
-  showBorder: true,
+  showBorder: false,
   showRoundBorder: false,
   noBorder: false,
   defaultOptionMessage: "Choose your option",

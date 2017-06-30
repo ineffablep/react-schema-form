@@ -1,5 +1,5 @@
 {
-  "name": "react-schema-form",
+  "name": "react-json-schema-form",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -17,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "es5": "cross-env NODE_ENV=production babel ./src/components/  -d npm"
+    "es5": "cross-env NODE_ENV=production babel ./src/components/  -d lib"
   },
   "repository": {
     "type": "git",

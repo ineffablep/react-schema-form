@@ -121,7 +121,7 @@ Input.defaultProps = {
   inputStyle: {},
   labelClass: "",
   labelStyle: {},
-  showBorder: true,
+  showBorder: false,
   showRoundBorder: false,
   noBorder: false,
   showAnimation: false,

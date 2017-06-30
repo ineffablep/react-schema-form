@@ -1,10 +1,10 @@
-# react-schema-form
+# react-json-schema-form
 
-`npm install react-schema-form`
+`npm install react-json-schema-form`
 
 This library constructs React elements from JSON by mapping JSON definitions to React components that you expose.
 
-JSX is not a dependency for react-schema-form.
+JSX is not a dependency for react-json-schema-form.
 
 [Quick Documentation](https://github.com/ineffablep/react-schema-form)
 
