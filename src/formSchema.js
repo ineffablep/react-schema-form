@@ -1,6 +1,6 @@
 const formSchema = {
   component: "h2",
-  defaultTheme:"Android",
+  defaultTheme:"ios",
   props: {
     className: "w3-form"
   },

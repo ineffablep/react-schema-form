@@ -35,12 +35,11 @@ class Select extends React.Component {
       selectCls = selectCls + " w3-border";
     }
     if (this.props.showRoundBorder || this.props.theme === "ios") {
-      selectCls = selectCls + " w3-round-large";
+      selectCls = selectCls + " w3-border w3-round-large";
     }
     if (this.props.noBorder) {
       selectCls = selectCls + " w3-border-0";
     }
-    console.log(selectCls);
     return selectCls;
   }
 
@@ -73,31 +72,35 @@ class Select extends React.Component {
   }
   renderOptions() {
     return this.state.loadedOptions.map(opt => {
-      return <option key={uuid.v4()} value={opt.value}> {opt.text} </option>;
+      return (
+        <option key={uuid.v4()} value={opt.value}>
+          {opt.text}
+        </option>
+      );
     });
   }
 
   render() {
     const {
-      id,
-      selectStyle,
-      selectClass,
-      onValueChange,
-      labelClass,
-      labelStyle,
-      labelText,
-      showBorder,
-      showRoundBorder,
-      noBorder,
-      theme,
-      validateOn,
-      validateRules,
-      selectedValue,
-      options,
-      optionsUrl,
-      defaultOptionMessage,
-      ...rest
-    } = this.props,
+        id,
+        selectStyle,
+        selectClass,
+        onValueChange,
+        labelClass,
+        labelStyle,
+        labelText,
+        showBorder,
+        showRoundBorder,
+        noBorder,
+        theme,
+        validateOn,
+        validateRules,
+        selectedValue,
+        options,
+        optionsUrl,
+        defaultOptionMessage,
+        ...rest
+      } = this.props,
       clasName = this.getClass();
 
     return (
@@ -114,12 +117,16 @@ class Select extends React.Component {
           {...rest}
           onChange={this.onSelectChange}
         >
-          <option value="" disabled>Choose your option</option>
+          <option value="" disabled>
+            Choose your option
+          </option>
           {this.renderOptions()}
         </select>
 
         {this.state.validationMessage !== "" &&
-          <span className="w3-text-red"> {this.state.validationMessage}</span>}
+          <span className="w3-text-red">
+            {" "}{this.state.validationMessage}
+          </span>}
       </p>
     );
   }
@@ -139,7 +146,8 @@ Select.propTypes = {
   onValueChange: PropTypes.func,
   options: PropTypes.array,
   optionsUrl: PropTypes.string,
-  selectedValue: PropTypes.any
+  selectedValue: PropTypes.any,
+  theme: PropTypes.string
 };
 
 Select.defaultProps = {
@@ -153,7 +161,8 @@ Select.defaultProps = {
   noBorder: false,
   defaultOptionMessage: "Choose your option",
   options: [],
-  optionsUrl: ""
+  optionsUrl: "",
+  theme: PropTypes.string
 };
 
 export default Select;

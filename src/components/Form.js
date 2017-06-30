@@ -141,6 +141,7 @@ class Form extends React.Component {
             return (
               <Select
                 key={uuid.v4()}
+                theme={theme}
                 {...comp.props}
                 onValueChange={this.onFieldChange}
               />
