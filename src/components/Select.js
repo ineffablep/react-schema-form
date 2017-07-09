@@ -162,7 +162,7 @@ Select.defaultProps = {
   defaultOptionMessage: "Choose your option",
   options: [],
   optionsUrl: "",
-  theme: PropTypes.string
+  theme: "android"
 };
 
 export default Select;

@@ -1,6 +1,6 @@
 const formSchema = {
   component: "h2",
-  defaultTheme:"ios",
+  defaultTheme:"android",
   props: {
     className: "w3-form"
   },
@@ -15,6 +15,7 @@ const formSchema = {
         type: "text",
         required: "true",
         id: "userName",
+        value:"test",
         validateOn: "onChange",
         validateRules: [
           {
@@ -32,6 +33,7 @@ const formSchema = {
         required: "true",
         labelClass: "w3-label",
         id: "password",
+        value:"test",
         validateOn: "onChange",
         validateRules: [
           {
@@ -75,7 +77,7 @@ const formSchema = {
           { value: "female",text:"Female" },
           { value: "notMentioned",text:"Don't want to mention" }
         ],
-        defaultValue: "male"
+        defaultValue: "female"
       }
     },
     {
@@ -83,6 +85,7 @@ const formSchema = {
       props: {
         labelText: "Agree Terms & Conditions",
         type: "checkbox",
+        checked:"checked",
         id: "agreeTerms"
       }
     },

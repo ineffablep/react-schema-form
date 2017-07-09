@@ -1,3 +1,5 @@
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
 .w3-ripple:active {
   opacity: 0.5;
 }
@@ -23,6 +25,7 @@
 .w3-hover-text-red:hover {
   color: #f44336 !important;
 }
+
 .w3-animate-input {
   transition: width 0.4s ease-in-out;
 }
@@ -33,6 +36,16 @@
 .w3-hover-green:hover {
   color: #fff !important;
   background-color: #4caf50 !important;
+}
+.w3-white,
+.w3-hover-white:hover {
+  color: #000 !important;
+  background-color: #fff !important;
+}
+
+.w3-border-green,
+.w3-hover-border-green:hover {
+  border-color: #4caf50 !important;
 }
 .w3-input {
   padding: 8px;
@@ -102,7 +115,7 @@
 
 .float-input:focus ~ label,
 .float-input:valid ~ label {
-  color: #4caf50;
+  color: inherit;
   top: -2.25rem;
   -webkit-transition: all 0.125s ease;
   transition: all 0.125s ease;
@@ -141,7 +154,6 @@
   display: block;
   width: 0;
   height: 2px;
-  background: #4caf50;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -151,7 +163,6 @@
 
 .float-input:focus {
   outline: none;
-  border: none !important;
 }
 
 .float-input:focus ~ .bar {
@@ -255,9 +266,6 @@ input:checked + .switch-btn.android:before {
 }
 .radio-btn .btn {
   margin: 4px;
-  background-color: #efefef;
-  border-radius: 4px;
-  border: 1px solid #d0d0d0;
   overflow: auto;
 }
 .radio-btn .label {

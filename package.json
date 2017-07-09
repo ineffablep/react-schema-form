@@ -4,7 +4,8 @@
   "private": true,
   "devDependencies": {
     "cross-env": "^5.0.1",
-    "react-scripts": "1.0.7"
+    "react-scripts": "1.0.7",
+    "react-styleguidist": "^5.5.4"
   },
   "dependencies": {
     "react": "^15.6.1",
@@ -17,7 +18,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "es5": "cross-env NODE_ENV=production babel ./src/components/  -d lib"
+    "es5": "cross-env NODE_ENV=production babel ./src/components/  -d lib",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build"
   },
   "repository": {
     "type": "git",

@@ -140,7 +140,7 @@ BaseInput.defaultProps = {
   noBorder: false,
   showAnimation: false,
   floatLabel: false,
-  theme: "ios"
+  theme: "android"
 };
 
 export default BaseInput;

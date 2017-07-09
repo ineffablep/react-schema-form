@@ -6,11 +6,12 @@ class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      validationMessage: ""
+      validationMessage: "",
+      value: this.props.value
     };
     this.validateInput = this.validateInput.bind(this);
   }
-  
+
   getClass() {
     const {
       showBorder,
@@ -20,19 +21,17 @@ class Input extends React.Component {
       theme
     } = this.props;
     let inputCls = this.props.inputClass;
-    if (inputCls === "") {
-      inputCls = "w3-input";
-    }
+    inputCls = inputCls + " w3-input";
     if (showBorder) {
       inputCls = inputCls + " w3-border";
     }
-    if (showRoundBorder || theme === "ios") {
+    else if (showRoundBorder || theme === "ios") {
       inputCls = inputCls + " w3-round-large";
     }
-    if (noBorder) {
+    else if (noBorder) {
       inputCls = inputCls + " w3-border-0";
     }
-    if (showAnimation) {
+    else if (showAnimation) {
       inputCls = inputCls + " w3-animate-input";
     }
     return inputCls;
@@ -40,6 +39,7 @@ class Input extends React.Component {
 
   validateInput(e) {
     let value = e.target.value;
+    this.setState({ value: value });
     if (
       this.props.validateOn &&
       (this.props.validateOn.trim().toLowerCase() === "onchange" ||
@@ -60,23 +60,24 @@ class Input extends React.Component {
   }
   render() {
     const {
-      labelClass,
-      labelStyle,
-      labelText,
-      inputStyle,
-      inputClass,
-      showBorder,
-      showRoundBorder,
-      noBorder,
-      showAnimation,
-      theme,
-      validateOn,
-      validateRules,
-      onValueChange,
-      id,
-      type,
-      ...rest
-    } = this.props,
+        labelClass,
+        labelStyle,
+        labelText,
+        inputStyle,
+        inputClass,
+        showBorder,
+        showRoundBorder,
+        noBorder,
+        showAnimation,
+        theme,
+        validateOn,
+        validateRules,
+        onValueChange,
+        id,
+        type,
+        value,
+        ...rest
+      } = this.props,
       clasName = this.getClass();
 
     return (
@@ -89,12 +90,15 @@ class Input extends React.Component {
           className={clasName}
           style={inputStyle}
           type={type}
+          value={this.state.value}
           {...rest}
           onChange={this.validateInput}
           onBlur={this.validateInput}
         />
         {this.state.validationMessage !== "" &&
-          <span className="w3-text-red"> {this.state.validationMessage}</span>}
+          <span className="w3-text-red">
+            {" "}{this.state.validationMessage}
+          </span>}
       </p>
     );
   }
@@ -112,12 +116,13 @@ Input.propTypes = {
   showAnimation: PropTypes.bool,
   id: PropTypes.string,
   type: PropTypes.string,
+  theme:PropTypes.string,
   onValueChange: PropTypes.func
 };
 
 Input.defaultProps = {
   labelText: "Label",
-  inputClass: "w3-input",
+  inputClass: "",
   inputStyle: {},
   labelClass: "",
   labelStyle: {},
@@ -125,7 +130,8 @@ Input.defaultProps = {
   showRoundBorder: false,
   noBorder: false,
   showAnimation: false,
-  type:"text"
+  type: "text",
+  theme:'android'
 };
 
 export default Input;
