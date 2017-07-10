@@ -2,6 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import validate from "./validate";
 
+/**
+ * 
+ * React Input that renders based on device o.s theme and validate
+ * @class Input
+ * @extends {React.Component}
+ */
 class Input extends React.Component {
   constructor(props) {
     super(props);
@@ -24,14 +30,11 @@ class Input extends React.Component {
     inputCls = inputCls + " w3-input";
     if (showBorder) {
       inputCls = inputCls + " w3-border";
-    }
-    else if (showRoundBorder || theme === "ios") {
+    } else if (showRoundBorder || theme === "ios") {
       inputCls = inputCls + " w3-round-large";
-    }
-    else if (noBorder) {
+    } else if (noBorder) {
       inputCls = inputCls + " w3-border-0";
-    }
-    else if (showAnimation) {
+    } else if (showAnimation) {
       inputCls = inputCls + " w3-animate-input";
     }
     return inputCls;
@@ -105,19 +108,62 @@ class Input extends React.Component {
 }
 
 Input.propTypes = {
+  /**
+   * Label Text to display
+   */
   labelText: PropTypes.string,
+  /**
+   * Style label with css class
+   */
   labelClass: PropTypes.string,
+  /**
+   * Style Label with React style object
+   */
   labelStyle: PropTypes.object,
+  /**
+   * Style input with css class
+   */
   inputClass: PropTypes.string,
+  /**
+   *  Style Input with  React Style Object
+   */
   inputStyle: PropTypes.object,
+  /**
+   * Show bordered input
+   */
   showBorder: PropTypes.bool,
+  /**
+   * Set true show rounded border as in iOS
+   */
   showRoundBorder: PropTypes.bool,
+  /**
+   * Set true remove Border from input box 
+   */
   noBorder: PropTypes.bool,
+  /**
+   * Set true animate input
+   */
   showAnimation: PropTypes.bool,
-  id: PropTypes.string,
+  /**
+   * Input Unique Identifier , 
+   * Id will be passed  with OnChange / OnBlur events to Uniquely Identify from Multiple Inputs
+   */
+  id: PropTypes.string.isRequired,
+  /**
+   * Input type 
+   */
   type: PropTypes.string,
-  theme:PropTypes.string,
-  onValueChange: PropTypes.func
+  /**
+   * Input theme property 
+   * You can override by passing theme
+   * Default to Android theme
+   *  override by supplying ios for IOS theme and win  for Windows theme
+   */
+  theme: PropTypes.string,
+  /**
+   * On  value change callback Function raised for onBlur and onChange, this is a required property
+   */
+  onValueChange: PropTypes.func.isRequired
 };
 
 Input.defaultProps = {
@@ -131,7 +177,7 @@ Input.defaultProps = {
   noBorder: false,
   showAnimation: false,
   type: "text",
-  theme:'android'
+  theme: "android"
 };
 
 export default Input;

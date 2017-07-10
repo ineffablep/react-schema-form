@@ -7,7 +7,14 @@ import Select from "./Select";
 import uuid from "uuid";
 import * as api from "./api";
 import validate from "./validate";
-
+/**
+ * Schema driven React Form
+ * Checks Validations
+ * Create JSON Object and POST if url is provided
+ * Raises SuccessCallback and ErrorCallback
+ * @class Form
+ * @extends {React.Component}
+ */
 class Form extends React.Component {
   constructor(props) {
     super(props);
@@ -67,9 +74,8 @@ class Form extends React.Component {
     }
   }
 
-  getTheme(defaultTheme ) {
-    if(defaultTheme)
-          return defaultTheme.trim().toLowerCase();
+  getTheme(defaultTheme) {
+    if (defaultTheme) return defaultTheme.trim().toLowerCase();
     let theme = defaultTheme;
     if (isMobile.iOS()) {
       theme = "ios";
@@ -78,7 +84,7 @@ class Form extends React.Component {
     } else if (isMobile.Windows()) {
       theme = "win";
     } else {
-      theme="browser";
+      theme = "browser";
     }
     return theme;
   }
@@ -104,7 +110,9 @@ class Form extends React.Component {
         >
           &times;
         </span>
-        <p>{this.state.message}</p>
+        <p>
+          {this.state.message}
+        </p>
       </div>
     );
   }
@@ -167,12 +175,33 @@ class Form extends React.Component {
 }
 
 Form.propTypes = {
+  /**
+   * Schema Object to render Form
+   */
   schema: PropTypes.object,
+  /**
+   * onSave Click Event Callback
+   */
   onSaveClick: PropTypes.func,
+  /**
+   * If URL Provided it will POST JSON Data
+   */
   saveUrl: PropTypes.string,
+  /**
+   * POST JSON Success Callback
+   */
   successCallback: PropTypes.func,
+  /**
+   * POST JSON Error Callback
+   */
   errorCallback: PropTypes.func,
+  /**
+   * Success message /alert will be displayed to User upon Successfully POST JSON
+   */
   successMessage: PropTypes.string,
+  /**
+   * Error message /alert will be displayed to User upon Failed POST JSON
+   */
   errorMessage: PropTypes.string
 };
 

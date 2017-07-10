@@ -1,30 +1,8 @@
-# react-schema-form
-
-`npm install react-schema-form`
-
-This library constructs React elements from JSON by mapping JSON definitions to React components that you expose.
-
-### Full Documentation
-
-* [Schema](#schema)
-* [Rendering](#rendering)
-* [Complete Example](#complete-example)
-* [Try the Demo] https://ineffablep.github.io/styleguide/index.html
-
-#### Schema
-The primary resource needed is a defined schema in JSON or a JavaScript object literal. It's recommended that schema attributes mainly define React component props. 
-*** This will check device OS and render native components  for Mobile devices (Android, iOS and Windows 10) and Browser based components for browser
-
-*** Simply import
- ```js  
- import Form from "react-json-schema-form/Form";
- import Form from "react-json-schema-form/index.css";
-
-```
-Example JS schema (ES6)
-```js
-{
+**Schema Driven Form default example**
+```example
+ const formSchema = {
   component: "h2",
+  defaultTheme:"android",
   props: {
     className: "w3-form"
   },
@@ -39,6 +17,7 @@ Example JS schema (ES6)
         type: "text",
         required: "true",
         id: "userName",
+        value:"test",
         validateOn: "onChange",
         validateRules: [
           {
@@ -56,6 +35,7 @@ Example JS schema (ES6)
         required: "true",
         labelClass: "w3-label",
         id: "password",
+        value:"test",
         validateOn: "onChange",
         validateRules: [
           {
@@ -99,7 +79,7 @@ Example JS schema (ES6)
           { value: "female",text:"Female" },
           { value: "notMentioned",text:"Don't want to mention" }
         ],
-        defaultValue: "male"
+        defaultValue: "female"
       }
     },
     {
@@ -107,6 +87,7 @@ Example JS schema (ES6)
       props: {
         labelText: "Agree Terms & Conditions",
         type: "checkbox",
+        checked:"checked",
         id: "agreeTerms"
       }
     },
@@ -114,41 +95,7 @@ Example JS schema (ES6)
       component: "Button"
     }
   ]
-}
+};
 
+<Form schema={formSchema} saveUrl="http://localhost:56772/api/values" />
 ```
-##### Rendering
-You can render form where ever you want by calling <Form schema= {shcemaJson}/>
-
-
-#### Complete Example
-
-```js
-import React, { Component } from "react";
-import Form from "react-json-schema-form/Form";
-import formSchema from "./formSchema";
-class App extends Component {
-
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <Form schema={formSchema} saveUrl="http://localhost:56772/api/values" />
-        </div>
-      </div>
-    );
-  }
-}
-
-export default App;
-
-
-```
-
-
-### Try the Demo
-
-To run the demo
-* `npm install`
-* `npm start`
-* The app will be served at http://localhost:3000

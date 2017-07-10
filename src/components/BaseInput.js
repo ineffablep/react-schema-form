@@ -5,7 +5,10 @@ import Input from "./Input";
 import FloatInput from "./FloatInput";
 import Checkbox from "./Checkbox";
 import Radio from "./Radio";
-
+/**
+ * React Input  automatically check and render Switch, Radio, Checkbox and Input depending on type
+ * @param {*} props 
+ */
 const BaseInput = props => {
   const {
     type,
@@ -104,27 +107,93 @@ const BaseInput = props => {
 };
 
 BaseInput.propTypes = {
+  /**
+   * Label Text to display
+   */
   labelText: PropTypes.string,
-  inputClass: PropTypes.string,
-  inputStyle: PropTypes.object,
+  /**
+   * Style label with css class
+   */
   labelClass: PropTypes.string,
+  /**
+   * Style Label with React style object
+   */
   labelStyle: PropTypes.object,
+  /**
+   * Style input with css class
+   */
+  inputClass: PropTypes.string,
+  /**
+   *  Style Input with  React Style Object
+   */
+  inputStyle: PropTypes.object,
+  /**
+   * Show bordered input
+   */
   showBorder: PropTypes.bool,
+  /**
+   * Set true show rounded border as in iOS
+   */
   showRoundBorder: PropTypes.bool,
+  /**
+   * Set true remove Border from input box 
+   */
   noBorder: PropTypes.bool,
+  /**
+   * Set true animate input
+   */
   showAnimation: PropTypes.bool,
+  /**
+   * Float Input / Material Design or Android Input  Border bottom css Class
+   */
   borderClass: PropTypes.string,
+  /**
+   * Float Input / Material Design or Android Input  Border bottom React Style Object
+   */
   borderStyle: PropTypes.object,
-  id: PropTypes.string,
-  onValueChange: PropTypes.func,
+  /**
+   * Input Unique Identifier , 
+   * Id will be passed  with OnChange / OnBlur events to Uniquely Identify from Multiple Inputs
+   */
+  id: PropTypes.string.isRequired,
+  /**
+   * On  value change callback Function raised for onBlur and onChange, this is a required property
+   */
+  onValueChange: PropTypes.func.isRequired,
+  /**
+   * Input theme property 
+   * You can override by passing theme
+   * Default to Android theme
+   *  override by supplying ios for IOS theme and win  for Windows theme
+   */
   theme: PropTypes.string,
-  defaultOptionMessage: PropTypes.string,
+  /**
+   * Radio Button CSS Class Name to customize
+   */
   radioBtnClassName: PropTypes.string,
+  /**
+   * Radio Button Style to customize
+   */
   radioBtnStyle: PropTypes.object,
+  /**
+   * Radio button Text Css Class 
+   */
   radioTextClassName: PropTypes.string,
+  /**
+   * Radio Button Text Style
+   */
   radioTextStyle: PropTypes.object,
+  /**
+  * Radio Buttons Group Name
+  */
   radioGroupName: PropTypes.string,
+  /**
+   * Array of Radio buttons with {value:'',disabled:'',text:''} objects in it
+   */
   radioOptions: PropTypes.array,
+  /**
+   * Default Selected Radio Value
+   */
   defaultValue: PropTypes.string
 };
 
@@ -140,7 +209,7 @@ BaseInput.defaultProps = {
   noBorder: false,
   showAnimation: false,
   floatLabel: false,
-  theme: "android"
+  theme: ""
 };
 
 export default BaseInput;

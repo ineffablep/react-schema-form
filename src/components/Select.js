@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import validate from "./validate";
 import uuid from "uuid";
 import * as api from "./api";
-
+/**
+ * React Select Component with theme support to device native O.S look and feel for Android, iOS, Windows and default HTMl5 Select fro Browser
+ * 
+ * @class Select
+ * @extends {React.Component}
+ */
 class Select extends React.Component {
   constructor(props) {
     super(props);
@@ -28,9 +33,8 @@ class Select extends React.Component {
 
   getClass() {
     let selectCls = this.props.selectClass;
-    if (selectCls === "") {
-      selectCls = "w3-select";
-    }
+    selectCls = selectCls + " w3-select ";
+
     if (this.props.showBorder || this.props.theme === "win") {
       selectCls = selectCls + " w3-border";
     }
@@ -133,25 +137,74 @@ class Select extends React.Component {
 }
 
 Select.propTypes = {
+  /**
+   * Css Class for Styling 
+   */
   selectClass: PropTypes.string,
+  /**
+   * React Style Object for Styling
+   */
   selectStyle: PropTypes.object,
+  /**
+   * Label to display
+   */
   labelText: PropTypes.string,
+  /**
+   * CSS Class to style label
+   */
   labelClass: PropTypes.string,
+  /**
+   * React Style object to style label
+   */
   labelStyle: PropTypes.object,
+  /**
+   * Set true to Show Bordered Select
+   */
   showBorder: PropTypes.bool,
+  /**
+  * Set true to show rounded border as in iOS
+  */
   showRoundBorder: PropTypes.bool,
+  /**
+   * Set true remove Border around Select
+   */
   noBorder: PropTypes.bool,
-  id: PropTypes.string,
+  /**
+   * Select Unique Identifier , 
+   * Id will be passed  with OnChange / OnBlur events to Uniquely Identify from Multiple Inputs
+   */
+  id: PropTypes.string.isRequired,
+  /**
+   * Select Placeholder
+   */
   defaultOptionMessage: PropTypes.string,
-  onValueChange: PropTypes.func,
+  /**
+   * On  value change callback Function raised for onBlur and onChange, this is a required property
+   */
+  onValueChange: PropTypes.func.isRequired,
+  /**
+ * Select Options array [{value:'male', text:'Mable'}, {value:'female', text:'Female'}]
+ */
   options: PropTypes.array,
+  /**
+   * URL fetch options data from AJAX/ HTML GET expected format is array of objects {value:'', text:''} 
+   */
   optionsUrl: PropTypes.string,
-  selectedValue: PropTypes.any,
+  /**
+    * Default Selected value- Ex:- male
+    */
+  selectedValue: PropTypes.string,
+  /**
+   * Select theme property 
+   * You can override by passing theme
+   * Default to Android theme
+   *  override by supplying ios for IOS theme and win  for Windows theme
+   */
   theme: PropTypes.string
 };
 
 Select.defaultProps = {
-  selectClass: "w3-select",
+  selectClass: "",
   selectStyle: {},
   labelText: "Label",
   labelClass: "",
