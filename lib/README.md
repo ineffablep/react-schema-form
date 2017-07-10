@@ -1,19 +1,15 @@
-# react-json-schema-form
+# react-schema-form
 
-`npm install react-json-schema-form`
+`npm install react-schema-form`
 
 This library constructs React elements from JSON by mapping JSON definitions to React components that you expose.
-
-JSX is not a dependency for react-json-schema-form.
-
-[Quick Documentation](https://github.com/ineffablep/react-schema-form)
 
 ### Full Documentation
 
 * [Schema](#schema)
 * [Rendering](#rendering)
 * [Complete Example](#complete-example)
-* [Try the Demo](#Try the Demo)
+* [Try the Demo] https://ineffablep.github.io/styleguide/index.html
 
 #### Schema
 The primary resource needed is a defined schema in JSON or a JavaScript object literal. It's recommended that schema attributes mainly define React component props. 
