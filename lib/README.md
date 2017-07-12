@@ -9,7 +9,7 @@ This library constructs React elements from JSON by mapping JSON definitions to 
 * [Schema](#schema)
 * [Rendering](#rendering)
 * [Complete Example](#complete-example)
-* [Try the Demo] https://ineffablep.github.io/styleguide/index.html
+* [Try the Demo] https://ineffablep.github.io/react-schema-form/styleguide/index.html
 
 #### Schema
 The primary resource needed is a defined schema in JSON or a JavaScript object literal. It's recommended that schema attributes mainly define React component props. 

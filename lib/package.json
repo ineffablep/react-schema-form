@@ -1,6 +1,6 @@
 {
   "name": "react-json-schema-form",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Json Schema driven React Forms",
   "main": "index.js",
   "scripts": {
