@@ -1,7 +1,7 @@
 {
   "name": "react-json-schema-form",
-  "version": "1.0.4",
-  "description": "Json Schema driven React Forms",
+  "version": "1.0.5",
+  "description": "Fully customizable Fastest rendering JS/ Json Schema driven React Forms that support validations, POST , Success and Error Alerts , callbacks , React Components (Input, Switch, Checkbox, Radio) renders device o.s theme (iOS,Android and Windows) by default and allows to override theme by setting theme prop",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,6 +14,12 @@
     "React",
     "Form",
     "Json",
+    "Android",
+    "iOS",
+    "Windows",
+    "Natvie",
+    "React Natvie",
+    "JS",
     "Schema"
   ],
   "author": "Sireesh Pangaluri",
