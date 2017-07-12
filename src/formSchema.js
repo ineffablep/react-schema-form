@@ -4,7 +4,6 @@ const formSchema = {
   props: {
     className: "w3-form"
   },
-  text: "Schema Driven Registration Form!",
   children: [
     {
       component: "BaseInput",

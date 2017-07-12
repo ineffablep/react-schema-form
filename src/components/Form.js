@@ -137,9 +137,12 @@ class Form extends React.Component {
     return (
       <form className="w3-form" {...this.props.schema.props}>
         {this.renderAlert()}
-        {React.createElement(component, { ...this.props.schema.props }, [
+        {
+          component &&
+          React.createElement(component, { ...this.props.schema.props }, [
           this.props.schema.text
-        ])}
+        ])
+      }
         {children.map(comp => {
           if (comp.component.trim().toLowerCase() === "button") {
             return (
