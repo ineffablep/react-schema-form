@@ -9,7 +9,7 @@ const formSchema = {
       component: "BaseInput",
       props: {
         labelText: "User Name",
-        placeholder: "Phone number or Email address",
+        placeholder: "Email address",
         labelClass: "w3-label",
         type: "text",
         required: "true",
@@ -19,7 +19,13 @@ const formSchema = {
         validateRules: [
           {
             rule: "required",
-            message: "Phone number or Email address is required"
+            message: "Email address is required"
+          },
+          {
+            rule: "regex",
+            expression:"^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$",
+            message: "Please enter valid email address",
+            t:""
           }
         ]
       }

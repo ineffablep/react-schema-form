@@ -1,6 +1,6 @@
 {
   "name": "react-json-schema-form",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Fully customizable Fastest rendering JS/ Json Schema driven React Forms that support validations, POST , Success and Error Alerts , callbacks , React Components (Input, Switch, Checkbox, Radio) renders device o.s theme (iOS,Android and Windows) by default and allows to override theme by setting theme prop",
   "main": "index.js",
   "scripts": {
