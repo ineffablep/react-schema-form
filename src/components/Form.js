@@ -48,6 +48,7 @@ class Form extends React.Component {
       type: ""
     };
     this.validateForm();
+    console.log(formData);
     if (this.state.message === "") {
       if (callBack) {
         callBack(formData);

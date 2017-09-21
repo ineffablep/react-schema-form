@@ -49,6 +49,23 @@ const formSchema = {
       }
     },
     {
+      component: "BaseInput",
+      props: {
+        labelText: "Address",
+        type: "place",
+        required: "true",
+        labelClass: "w3-label",
+        id: "address",
+        validateOn: "onChange",
+        validateRules: [
+          {
+            rule: "required",
+            message: "Address is required"
+          }
+        ]
+      }
+    },
+    {
       component: "Select",
       props: {
         labelText: "I am a",

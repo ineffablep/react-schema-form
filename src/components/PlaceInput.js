@@ -1,21 +1,64 @@
 import React from "react";
 import PropTypes from "prop-types";
-import validate from "./validate";
+import uuid from "uuid";
+import { loadJS } from "./api";
 
-/**
- * 
- * React Input that renders based on device o.s theme and validate
- * @class Input
- * @extends {React.Component}
- */
-class Input extends React.Component {
+class PlaceInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      validationMessage: "",
-      value: this.props.value
-    };
-    this.validateInput = this.validateInput.bind(this);
+    this.state = { value: "", autocompleteItems: [] };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.googleService = null;
+  }
+
+  componentWillMount() {
+    const key = this.props.key || "AIzaSyCoq4_-BeKtYRIs-3FjJL721G1eP5DaU0g",
+      src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
+    loadJS(src);
+  }
+
+  handleInputChange(e) {
+    if (!e.target.value) {
+      this.clearAutocomplete();
+      return;
+    }
+    this.setState({
+      value: e.target.value
+    });
+    this.getPredictions(e.target.value);
+  }
+
+  getPredictions(value) {
+    if (value.length) {
+      if (window.google) {
+        if (!this.googleService) {
+          this.googleService = new window.google.maps.places
+            .AutocompleteService();
+        }
+        this.googleService.getQueryPredictions(
+          { input: value },
+          (predictions, status) => {
+            if (status !== this.autocompleteOK) {
+              this.clearAutocomplete();
+            }
+            if (predictions && predictions.length > 0) {
+              this.setState({
+                autocompleteItems: predictions.map(_ => ({
+                  placeId: _.place_id,
+                  address: `${_.structured_formatting.main_text} ${_
+                    .structured_formatting.secondary_text}`
+                }))
+              });
+            }
+          }
+        );
+      }
+    }
+  }
+
+  clearAutocomplete() {
+    this.setState({ autocompleteItems: [] });
   }
 
   getClass() {
@@ -40,27 +83,31 @@ class Input extends React.Component {
     return inputCls;
   }
 
-  validateInput(e) {
-    let value = e.target.value;
-    this.setState({ value: value });
-    if (
-      this.props.validateOn &&
-      (this.props.validateOn.trim().toLowerCase() === "onchange" ||
-        this.props.validateOn.trim().toLowerCase() === "onblur")
-    ) {
-      let error = validate(this.props.validateRules, value);
-      if (error === "") {
-        this.props.onValueChange &&
-          this.props.onValueChange(this.props.id, value);
-        this.setState({ validationMessage: "" });
-      } else {
-        this.setState({ validationMessage: error });
-      }
-    } else {
-      this.props.onValueChange &&
-        this.props.onValueChange(this.props.id, value);
-    }
+  renderSuggest(item) {
+    return (
+      <li
+        key={uuid.v4()}
+        className="autoPlace pointer"
+        onClick={() => this.handleSelect(item)}
+      >
+        <span>
+          <i className="fa fa-map-marker"> </i>
+        </span>
+       
+        <span className="address ">
+          {item.address}
+        </span>
+      </li>
+    );
   }
+
+  handleSelect(item) {
+    const value =  item.address ;
+    this.setState({ value: value });
+    this.props.onValueChange(this.props.id, item);
+    this.clearAutocomplete();
+  }
+
   render() {
     const {
         labelClass,
@@ -68,6 +115,7 @@ class Input extends React.Component {
         labelText,
         inputStyle,
         inputClass,
+        key,
         showBorder,
         showRoundBorder,
         noBorder,
@@ -79,35 +127,37 @@ class Input extends React.Component {
         id,
         type,
         value,
+        placeholder,
         ...rest
       } = this.props,
+      { autocompleteItems } = this.state,
       className = this.getClass();
-
     return (
-      <p>
+      <div className="w3-row">
         <label htmlFor={id} className={labelClass} style={labelStyle}>
           {labelText}
         </label>
         <input
           id={id}
-          className={className}
           style={inputStyle}
-          type={type}
+          type="search"
+          className={className}
           value={this.state.value}
+          onChange={this.handleInputChange}
+          onBlur={this.handleInputChange}
+          placeholder={placeholder || "Search Places..."}
           {...rest}
-          onChange={this.validateInput}
-          onBlur={this.validateInput}
         />
-        {this.state.validationMessage !== "" &&
-          <span className="w3-text-red">
-            {this.state.validationMessage}
-          </span>}
-      </p>
+        {autocompleteItems.length > 0 &&
+          <ul className="w3-ul autoPlaceContainer">
+            {autocompleteItems.map(_ => this.renderSuggest(_))}
+          </ul>}
+      </div>
     );
   }
 }
 
-Input.propTypes = {
+PlaceInput.propTypes = {
   /**
    * Label Text to display
    */
@@ -150,10 +200,6 @@ Input.propTypes = {
    */
   id: PropTypes.string.isRequired,
   /**
-   * Input type 
-   */
-  type: PropTypes.string,
-  /**
    * Input theme property 
    * You can override by passing theme
    * Default to Android theme
@@ -166,7 +212,7 @@ Input.propTypes = {
   onValueChange: PropTypes.func.isRequired
 };
 
-Input.defaultProps = {
+PlaceInput.defaultProps = {
   labelText: "Label",
   inputClass: "",
   inputStyle: {},
@@ -176,8 +222,6 @@ Input.defaultProps = {
   showRoundBorder: false,
   noBorder: false,
   showAnimation: false,
-  type: "text",
   theme: "android"
 };
-
-export default Input;
+export default PlaceInput;

@@ -5,6 +5,7 @@ import Input from "./Input";
 import FloatInput from "./FloatInput";
 import Checkbox from "./Checkbox";
 import Radio from "./Radio";
+import PlaceInput from "./PlaceInput";
 /**
  * React Input  automatically check and render Switch, Radio, Checkbox and Input depending on type
  * @param {*} props 
@@ -53,6 +54,20 @@ const BaseInput = props => {
         {...rest}
       />
     );
+  if (props.type === "place") {
+    return (
+      <PlaceInput
+        labelClass={labelClass}
+        labelText={labelText}
+        labelStyle={labelStyle}
+        inputStyle={inputStyle}
+        inputClass={inputClass}
+        id={id}
+        onValueChange={onValueChange}
+        {...rest}
+      />
+    );
+  }
   if (type === "radio")
     return (
       <Radio
