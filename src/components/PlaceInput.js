@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import uuid from "uuid";
-import { loadJS } from "./api";
 
 class PlaceInput extends React.Component {
   constructor(props) {
@@ -12,20 +11,15 @@ class PlaceInput extends React.Component {
     this.googleService = null;
   }
 
-  componentWillMount() {
-    const key = this.props.key || "AIzaSyCoq4_-BeKtYRIs-3FjJL721G1eP5DaU0g",
-      src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
-    loadJS(src);
-  }
-
   handleInputChange(e) {
+    this.setState({
+      value: e.target.value
+    });
+
     if (!e.target.value) {
       this.clearAutocomplete();
       return;
     }
-    this.setState({
-      value: e.target.value
-    });
     this.getPredictions(e.target.value);
   }
 
@@ -36,7 +30,7 @@ class PlaceInput extends React.Component {
           this.googleService = new window.google.maps.places
             .AutocompleteService();
         }
-        this.googleService.getQueryPredictions(
+        this.googleService.getPlacePredictions(
           { input: value },
           (predictions, status) => {
             if (status !== this.autocompleteOK) {
@@ -45,6 +39,7 @@ class PlaceInput extends React.Component {
             if (predictions && predictions.length > 0) {
               this.setState({
                 autocompleteItems: predictions.map(_ => ({
+                  suggestion: _.description,
                   placeId: _.place_id,
                   address: `${_.structured_formatting.main_text} ${_
                     .structured_formatting.secondary_text}`
@@ -93,7 +88,7 @@ class PlaceInput extends React.Component {
         <span>
           <i className="fa fa-map-marker"> </i>
         </span>
-       
+
         <span className="address ">
           {item.address}
         </span>
@@ -102,33 +97,46 @@ class PlaceInput extends React.Component {
   }
 
   handleSelect(item) {
-    const value =  item.address ;
+    const value = item.suggestion;
     this.setState({ value: value });
-    this.props.onValueChange(this.props.id, item);
+    this.getLangLat(item);
     this.clearAutocomplete();
+  }
+  getLangLat(item) {
+    const geocoder = new window.google.maps.Geocoder()
+    const OK = window.google.maps.GeocoderStatus.OK
+    const placeId = item.placeId;
+    geocoder.geocode({ placeId }, (results, status) => {
+      if (status === OK) {
+        item.lat = results[0].geometry.location.lat();
+        item.lng = results[0].geometry.location.lng();
+        item.fullAddress= results[0].formatted_address;
+      }
+      this.props.onValueChange(this.props.id, item);
+    });
   }
 
   render() {
     const {
         labelClass,
-        labelStyle,
-        labelText,
-        inputStyle,
-        inputClass,
-        key,
-        showBorder,
-        showRoundBorder,
-        noBorder,
-        showAnimation,
-        theme,
-        validateOn,
-        validateRules,
-        onValueChange,
-        id,
-        type,
-        value,
-        placeholder,
-        ...rest
+      labelStyle,
+      labelText,
+      inputStyle,
+      inputClass,
+      key,
+      showBorder,
+      showRoundBorder,
+      noBorder,
+      showAnimation,
+      theme,
+      validateOn,
+      validateRules,
+      onValueChange,
+      id,
+      type,
+      value,
+      placeholder,
+      ...rest
       } = this.props,
       { autocompleteItems } = this.state,
       className = this.getClass();
@@ -144,7 +152,6 @@ class PlaceInput extends React.Component {
           className={className}
           value={this.state.value}
           onChange={this.handleInputChange}
-          onBlur={this.handleInputChange}
           placeholder={placeholder || "Search Places..."}
           {...rest}
         />
